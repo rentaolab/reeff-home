@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Reeff">
+  <!-- Reeff family mark — single source of truth for every icon, OG card and PWA asset.
+       Run `npm run brand` after editing. The R is the real outline of Liberation Sans Bold
+       (Arial-metric compatible, SIL OFL 1.1); the four dots are the products
+       (PDF red, Image violet, Audio amber, Receipt emerald).
+       Geometry: cap 16.5, baseline y=24.2, R ink 15.22 wide, cluster 6.80 wide,
+       centred as one group: originX = (32 - (RInk + gap + cluster)) / 2 = 4.59. -->
+  <rect width="32" height="32" rx="7" fill="#0F172A"/>
+  <path d="M15.92,24.2L12.09,17.93L8.04,17.93L8.04,24.2L4.59,24.2L4.59,7.7L12.83,7.7Q15.78,7.7 17.39,8.97Q18.99,10.24 18.99,12.62Q18.99,14.35 18.01,15.61Q17.02,16.87 15.35,17.27L19.81,24.2ZM15.51,12.76Q15.51,10.38 12.47,10.38L8.04,10.38L8.04,15.25L12.56,15.25Q14.02,15.25 14.76,14.6Q15.51,13.94 15.51,12.76Z" fill="#FFFFFF"/>
+  <rect x="20.61" y="17.40" width="2.8" height="2.8" fill="#DC2626"/><rect x="24.61" y="17.40" width="2.8" height="2.8" fill="#7C3AED"/><rect x="20.61" y="21.40" width="2.8" height="2.8" fill="#F59E0B"/><rect x="24.61" y="21.40" width="2.8" height="2.8" fill="#059669"/>
+</svg>
