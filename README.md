@@ -68,6 +68,17 @@ npm run brand    # 改了 public/brand/mark.svg 之后重新导出所有图标�
 - 站点已加基线安全头（`frame-ancestors 'self'` + `X-Frame-Options: SAMEORIGIN` + `nosniff` + Referrer-Policy），防止被第三方 iframe 嵌套白嫖带宽/请求配额。
 - 建议把同样的 `frame-ancestors 'self'` 加到工具站（`pdf.reeff.app`）的 `next.config.ts`。
 
+## AdSense / ads.txt
+
+- `public/ads.txt` 是**必须保留**的文件：AdSense 的「添加网站」只接受注册域（子域会被表单拒绝），
+  所以账户里的站点是 `reeff.app`，根域这份文件决定站点状态 ——
+  `https://reeff.app/ads.txt` 必须返回 `200` + `text/plain` 且**不跳转**。
+- 工具站 `pdf.reeff.app` 在另一个仓库（Cloudflare Pages）另有同内容的一份；两处 pub id 必须一致。
+  真正承载广告单元的是工具站，根域这份只用于站点授权/状态。
+- 记录行放在**第一行**（`#` 注释合法，但 AdSense 自己生成的片段就是记录在前）。
+- `src/proxy.ts` 的 matcher 已排除带 `.` 的路径，`/ads.txt` 不会被重写成 `/{locale}/ads.txt`；
+  本地 `next start` 实测 `200 text/plain`。改了 proxy 的 matcher 记得复查这一条。
+
 ## i18n
 
 新增页面时：在 `src/components/SiteHeader.tsx` 的 `path` 传入该页的 locale-free 路径（如 `/privacy`），语言切换器会自动生成正确链接。

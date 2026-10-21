@@ -1,0 +1,10 @@
+google.com, pub-4891040014815847, DIRECT, f08c47fec0942fa0
+# ads.txt for reeff.app — https://iabtechlab.com/ads-txt/
+#
+# AdSense's "Sites" list only accepts the registrable domain, so the account
+# site is reeff.app and this file must live at the domain root. The tool site
+# (pdf.reeff.app) serves its own copy of this line at its own root; both must
+# name the same publisher.
+#
+# Keep the record on the first line: Google's checker ignores "#" comments, but
+# a record-first file is what AdSense's own snippet generator produces.
