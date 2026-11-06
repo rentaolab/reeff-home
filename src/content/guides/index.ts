@@ -3,6 +3,10 @@ import { splitPdfIntoChapters } from "./split-pdf-into-chapters";
 import { whyCompressPdfBarelyShrinks } from "./why-compress-pdf-barely-shrinks";
 import { printReadyPdfChecklist } from "./print-ready-pdf-checklist";
 import { deleteExtractReorderWhichTool } from "./delete-extract-reorder-which-tool";
+import { signAPdfWithoutPrinter } from "./sign-a-pdf-without-printer";
+import { imagesToPdfDpiAndSize } from "./images-to-pdf-dpi-and-size";
+import { pdfToImageDpiGuide } from "./pdf-to-image-dpi-guide";
+import { browserMemoryLimitsForPdf } from "./browser-memory-limits-for-pdf";
 import type { Guide, Localized } from "@/content/types";
 
 /**
@@ -18,6 +22,10 @@ export const guides: Localized<Guide>[] = [
   whyCompressPdfBarelyShrinks,
   printReadyPdfChecklist,
   deleteExtractReorderWhichTool,
+  signAPdfWithoutPrinter,
+  imagesToPdfDpiAndSize,
+  pdfToImageDpiGuide,
+  browserMemoryLimitsForPdf,
 ];
 
 /** Stable list used by generateStaticParams and the sitemap. */
