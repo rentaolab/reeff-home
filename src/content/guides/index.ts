@@ -1,6 +1,8 @@
 import { mergeWithoutLosingBookmarks } from "./merge-without-losing-bookmarks";
 import { splitPdfIntoChapters } from "./split-pdf-into-chapters";
 import { whyCompressPdfBarelyShrinks } from "./why-compress-pdf-barely-shrinks";
+import { printReadyPdfChecklist } from "./print-ready-pdf-checklist";
+import { deleteExtractReorderWhichTool } from "./delete-extract-reorder-which-tool";
 import type { Guide, Localized } from "@/content/types";
 
 /**
@@ -14,6 +16,8 @@ export const guides: Localized<Guide>[] = [
   mergeWithoutLosingBookmarks,
   splitPdfIntoChapters,
   whyCompressPdfBarelyShrinks,
+  printReadyPdfChecklist,
+  deleteExtractReorderWhichTool,
 ];
 
 /** Stable list used by generateStaticParams and the sitemap. */
