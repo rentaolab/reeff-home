@@ -6,19 +6,29 @@ import ProductGrid from "@/components/ProductGrid";
 import PillarGrid from "@/components/PillarGrid";
 import ToolDirectory from "@/components/ToolDirectory";
 import WaitlistForm from "@/components/WaitlistForm";
+import HomeSections from "@/components/HomeSections";
+import Faq from "@/components/Faq";
+import GuideCard from "@/components/GuideCard";
+import { homeContent } from "@/content/home";
+import { SITE } from "@/content/site";
+import { getGuides } from "@/lib/content";
 import { PDF_BASE, dictionaries, isLocale } from "@/lib/dictionaries";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = dictionaries[locale];
+  const home = homeContent[locale];
+  // Most recently updated articles; the strip disappears while there are none.
+  const latest = getGuides(locale).slice(0, 3);
 
-  // Brand-entity signals for search engines (docs/brand-brief.md §9).
+  // Brand-entity signals for search engines (docs/brand-brief.md §9), plus the
+  // FAQ block whose questions are rendered further down the same page.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Organization", name: "Reeff", url: "https://reeff.app", logo: "https://reeff.app/icon.png" },
-      { "@type": "WebSite", name: "Reeff", url: "https://reeff.app", inLanguage: locale },
+      { "@type": "Organization", name: SITE.name, url: SITE.url, logo: `${SITE.url}/icon.png` },
+      { "@type": "WebSite", name: SITE.name, url: SITE.url, inLanguage: locale },
       {
         "@type": "ItemList",
         name: t.products.title,
@@ -27,6 +37,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           position: index + 1,
           name: item.name,
           description: item.tagline,
+        })),
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: home.faq.items.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
         })),
       },
     ],
@@ -60,6 +78,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <ProductGrid locale={locale} t={t} />
         <PillarGrid t={t} />
         <ToolDirectory locale={locale} t={t} />
+
+        <HomeSections sections={home.sections} />
+
+        {latest.length > 0 && (
+          <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500">{t.nav.guides}</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {latest.map((guide) => (
+                <GuideCard key={guide.slug} locale={locale} guide={guide} t={t} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <Faq heading={home.faq.heading} intro={home.faq.intro} items={home.faq.items} />
 
         <section id="waitlist" className="mx-auto max-w-3xl scroll-mt-24 px-4 py-14 sm:px-6">
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">

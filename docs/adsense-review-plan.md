@@ -1,6 +1,6 @@
 # AdSense「低价值内容」整改计划（Site Review Plan v1）
 
-> **状态：阶段 0–2 完成 → 阶段 3 待开始（2026-11-06）。**
+> **状态：阶段 0–3 完成 → 阶段 4 待开始（2026-11-06）。**
 > 最后更新：2026-11-06
 > AdSense 站点状态：`需要注意` · 原因：**低价值内容**（2026-10 提交，已等 2 周）
 > **接手第一件事**：读第 8 节的「接手须知」，然后从第 9 节「进度日志」最后一条的「下一步」开始。
@@ -85,7 +85,7 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 | **0** | 计划与基线 | 本文件 + 基线快照 | 0.5 天 | ✅ 已完成（2026-11-06） |
 | **1** | 内容骨架与数据层 | `src/content/*`、`src/lib/content.ts`、`GuideBody/GuideCard/ProsePage`、路由骨架（**不上 sitemap、不进导航、`noindex`**） | 1 天 | ✅ 已完成（2026-11-06） |
 | **2** | 站点身份页 | `/why-local` `/about` `/contact` `/changelog` `/roadmap` 正式文案 + 页脚/导航 + `terms` 主体 | 2 天 | ✅ 已完成（2026-11-06） |
-| **3** | 首页扩写 | 首页 ≥900 词 + FAQ + FAQPage JSON-LD + `Coming soon` → `/roadmap` | 1.5 天 | ⬜ 未开始 |
+| **3** | 首页扩写 | 首页 ≥900 词 + FAQ + FAQPage JSON-LD + `Coming soon` → `/roadmap` | 1.5 天 | ✅ 已完成（2026-11-06） |
 | **4** | 指南写作（前半） | 文章 1–5（en + zh） + 截图 | 3 天 | ⬜ 未开始 |
 | **5** | 指南写作（后半） | 文章 6–9（en + zh） + 截图 | 2.5 天 | ⬜ 未开始 |
 | **6** | 放开索引与门禁 | 新页从 `noindex` 转为可索引、进 sitemap/导航、`check:content` 接入 postbuild | 1 天 | ⬜ 未开始 |
@@ -314,4 +314,5 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 | 2026-11-06 | 0 | 建立本计划；记录基线（根域 6 URL / 285 词，工具站 170 URL / 338–569 词）；确定分层与红线 | 未涉及代码 | 阶段 1：`src/content/*` + `src/lib/{content,indexing}.ts` + 3 个渲染组件 + 8 个路由骨架（`noindex`） |
 | 2026-11-06 | 1 | 新增 `src/content/{site,types}.ts`、`src/content/pages/*`（about/contact/why-local/changelog/roadmap/guides）、`src/content/guides/index.ts`（0 篇，待阶段 4）、`src/lib/{content,indexing,metadata,nav}.ts`、`GuideBody/GuideCard/ProsePage`、6 个路由（`/about` `/contact` `/why-local` `/changelog` `/roadmap` `/guides` + `/guides/[slug]`）；字典新增 `common`/`nav` 两组文案。顺带把「关于/联系/本地处理/更新日志/路线图」正文写完（原计划放在阶段 2） | `tsc --noEmit` 0 错；`npm run lint` 0 警告；`npm run build` 通过；6 个新页面 HTML 均为 `noindex, follow`；sitemap 仍为 6 条（未放开）。正文词数：why-local 934 词 / 1276 字；about 583 / 800；roadmap 465 / 653；contact 418 / 575；changelog 238 / 326；guides 268 / 370；首页仍 284 词（阶段 3 处理） | 阶段 2：页脚 Resources 列 + 页头 Guides 入口、`terms` 填实主体并删 `TODO`、工具数 11 → 12、`ProductGrid` 改指 `/roadmap`、`/contact` 接表单 |
 | 2026-11-06 | 2 | 运营主体入档（Ripple Effect Technologies / 马来西亚）：`terms` 删 `TODO` 写实、`/about` 点名主体、`SITE.entity` + `SITE.jurisdiction` 成唯一真源；`src/lib/nav.ts` 新增 `visibleResources()`（用 `isIndexable()` 过滤，未放开索引时页脚 Resources 列与页头 Guides 入口自动隐藏）；`ProductGrid` 的 Coming soon 卡改指 `/roadmap` 并在页脚同样处理；工具数 11 → 12（`Compress PDF`/`压缩 PDF`）；`privacy` 增加「广告」段并改日期；新增 `ContactForm` + `sendMessage()` server action（`CONTACT_WEBHOOK_URL`，回落 `WAITLIST_WEBHOOK_URL`） | `tsc --noEmit` 0 错；`lint` 0 警告；`build` 通过；`grep -rn "TODO" src/` **为空**；新页面仍全部 `noindex`；页脚 Resources 列按预期隐藏 | 阶段 3：首页扩写（900+ 词、4 个新 section、8–10 条可见 FAQ + 对应 `FAQPage` JSON-LD） |
+| 2026-11-06 | 3 | 新增 `src/content/home.ts`（三段长文案 + 10 条 FAQ，en/zh 各一份）、`HomeSections` / `Faq` 组件；首页由 284 词扩到 **1,304 词**（zh 1,933 字）；`FAQPage` JSON-LD 与可见 `<details>` **同源同数**（各 10 条）；「最新指南」条在指南为空时自动隐藏，阶段 4 加文章后自动出现 | `tsc` 0 错、`lint` 0 警告、`build` 通过；首页 HTML 实测 en 1,304 词 / zh 1,933 字；`<details>` 10 条 == JSON-LD `Question` 10 条 | 阶段 4：指南 1–5（en ≥1,200 词 / zh ≥1,500 字，含截图） |
 
