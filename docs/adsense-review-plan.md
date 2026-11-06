@@ -1,6 +1,6 @@
 # AdSense「低价值内容」整改计划（Site Review Plan v1）
 
-> **状态：阶段 0 待完成 → 阶段 1 未开始。**
+> **状态：阶段 0–1 完成 → 阶段 2 进行中（2026-11-06）。**
 > 最后更新：2026-11-06
 > AdSense 站点状态：`需要注意` · 原因：**低价值内容**（2026-10 提交，已等 2 周）
 > **接手第一件事**：读第 8 节的「接手须知」，然后从第 9 节「进度日志」最后一条的「下一步」开始。
@@ -82,8 +82,8 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 
 | 阶段 | 名称 | 产出 | 工期 | 状态 |
 |---|---|---|---|---|
-| **0** | 计划与基线 | 本文件 + 基线快照 | 0.5 天 | ⏳ 进行中 |
-| **1** | 内容骨架与数据层 | `src/content/*`、`src/lib/content.ts`、`GuideBody/GuideCard/ProsePage`、路由骨架（**不上 sitemap、不进导航、`noindex`**） | 1 天 | ⬜ 未开始 |
+| **0** | 计划与基线 | 本文件 + 基线快照 | 0.5 天 | ✅ 已完成（2026-11-06） |
+| **1** | 内容骨架与数据层 | `src/content/*`、`src/lib/content.ts`、`GuideBody/GuideCard/ProsePage`、路由骨架（**不上 sitemap、不进导航、`noindex`**） | 1 天 | ✅ 已完成（2026-11-06） |
 | **2** | 站点身份页 | `/why-local` `/about` `/contact` `/changelog` `/roadmap` 正式文案 + 页脚/导航 + `terms` 主体 | 2 天 | ⬜ 未开始 |
 | **3** | 首页扩写 | 首页 ≥900 词 + FAQ + FAQPage JSON-LD + `Coming soon` → `/roadmap` | 1.5 天 | ⬜ 未开始 |
 | **4** | 指南写作（前半） | 文章 1–5（en + zh） + 截图 | 3 天 | ⬜ 未开始 |
@@ -305,4 +305,5 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 | 日期 | 阶段 | 完成内容 | 验证结果 | 下一步 |
 |---|---|---|---|---|
 | 2026-11-06 | 0 | 建立本计划；记录基线（根域 6 URL / 285 词，工具站 170 URL / 338–569 词）；确定分层与红线 | 未涉及代码 | 阶段 1：`src/content/*` + `src/lib/{content,indexing}.ts` + 3 个渲染组件 + 8 个路由骨架（`noindex`） |
+| 2026-11-06 | 1 | 新增 `src/content/{site,types}.ts`、`src/content/pages/*`（about/contact/why-local/changelog/roadmap/guides）、`src/content/guides/index.ts`（0 篇，待阶段 4）、`src/lib/{content,indexing,metadata,nav}.ts`、`GuideBody/GuideCard/ProsePage`、6 个路由（`/about` `/contact` `/why-local` `/changelog` `/roadmap` `/guides` + `/guides/[slug]`）；字典新增 `common`/`nav` 两组文案。顺带把「关于/联系/本地处理/更新日志/路线图」正文写完（原计划放在阶段 2） | `tsc --noEmit` 0 错；`npm run lint` 0 警告；`npm run build` 通过；6 个新页面 HTML 均为 `noindex, follow`；sitemap 仍为 6 条（未放开）。正文词数：why-local 934 词 / 1276 字；about 583 / 800；roadmap 465 / 653；contact 418 / 575；changelog 238 / 326；guides 268 / 370；首页仍 284 词（阶段 3 处理） | 阶段 2：页脚新增 Resources 列 + 页头加 Guides、`terms` 填实主体并删 `TODO`、工具数 11 → 12、`ProductGrid` 的 Coming soon 改指 `/roadmap`、`/contact` 接表单 |
 

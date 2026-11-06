@@ -49,6 +49,24 @@ export type Dictionary = {
     contact: string;
     copyright: string;
   };
+  /** Shared labels for content pages (dates, reading time, breadcrumbs). */
+  common: {
+    lastUpdated: string;
+    published: string;
+    minRead: string;
+    relatedTools: string;
+    home: string;
+    allGuides: string;
+  };
+  /** Nav + footer labels for the content section. Paths live in src/lib/nav.ts. */
+  nav: {
+    guides: string;
+    whyLocal: string;
+    about: string;
+    changelog: string;
+    roadmap: string;
+    contact: string;
+  };
   langLabel: string;
 };
 
@@ -183,6 +201,22 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contact",
       copyright: "© 2026 Reeff · reeff.app",
     },
+    common: {
+      lastUpdated: "Last updated",
+      published: "Published",
+      minRead: "min read",
+      relatedTools: "Tools used here",
+      home: "Home",
+      allGuides: "All guides",
+    },
+    nav: {
+      guides: "Guides",
+      whyLocal: "On-device",
+      about: "About",
+      changelog: "Changelog",
+      roadmap: "Roadmap",
+      contact: "Contact",
+    },
     langLabel: "Language",
   },
   zh: {
@@ -285,6 +319,22 @@ export const dictionaries: Record<Locale, Dictionary> = {
       terms: "使用条款",
       contact: "联系我们",
       copyright: "© 2026 Reeff · reeff.app",
+    },
+    common: {
+      lastUpdated: "最后更新",
+      published: "发布于",
+      minRead: "分钟读完",
+      relatedTools: "用到的工具",
+      home: "首页",
+      allGuides: "全部指南",
+    },
+    nav: {
+      guides: "指南",
+      whyLocal: "本地处理",
+      about: "关于",
+      changelog: "更新日志",
+      roadmap: "路线图",
+      contact: "联系我们",
     },
     langLabel: "语言",
   },
