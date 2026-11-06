@@ -37,11 +37,11 @@ npm run brand    # 改了 public/brand/mark.svg 之后重新导出所有图标�
 - 改完源文件跑 `npm run brand`，会重新生成 `icon.svg` / `icon.png(32)` / `icon1.png(48)` / `icon2.png(96)` / `apple-icon.png(180)` / `opengraph-image.png(1200×630)` / `brand/icon-192|512|512-maskable`
 - 脚本会自检 OG 图的留白（白字必须离边缘 ≥24px），太窄会直接把数字报出来
 
-## ⚠️ 上线前必须做的 4 件事
+## ⚠️ 上线前必须核对的事
 
-1. **waitlist 目前不存任何数据** —— 设置环境变量 `WAITLIST_WEBHOOK_URL`（Formspree / Buttondown / Resend / Zapier / 自建 API 均可，只要接受一个 JSON POST）。未设置时表单照常显示成功，但数据被丢弃，且服务端会打 `error` 日志。
-2. `src/lib/dictionaries.ts` 里的 `CONTACT_EMAIL` 现在是占位 `hello@reeff.app` —— 换成真实邮箱。
-3. `docs/brand-brief.md` 与 `/[locale]/terms` 里的「适用法律」是 `TODO` —— 填写经营主体与管辖地（接支付前必须补齐）。
+1. **waitlist 目前不存任何数据** —— 设置环境变量 `WAITLIST_WEBHOOK_URL`（Formspree / Buttondown / Resend / Zapier / 自建 API 均可，只要接受一个 JSON POST）。未设置时表单照常显示成功，但数据被丢弃，且服务端会打 `error` 日志。联系页的留言走 `CONTACT_WEBHOOK_URL`（未设时回落到 `WAITLIST_WEBHOOK_URL`）。
+2. `CONTACT_EMAIL` 是 `hello@reeff.app`：这个邮箱必须真的能收信，并且与 `src/content/site.ts` 的 `SITE.email` 保持一致（正文里用的是后者）。
+3. ✅ **「适用法律」已填**：Ripple Effect Technologies（马来西亚注册）。若主体或管辖地变更，同步改 `/[locale]/terms` 与 `src/content/site.ts` 的 `entity` / `jurisdiction`。
 4. 加 Vercel Analytics（或 Plausible）后再更新 `/privacy` 的「我们收集什么」。
 
 ## 🚀 部署与 DNS（修掉 reeff.app 的 522）

@@ -1,6 +1,6 @@
 # AdSense「低价值内容」整改计划（Site Review Plan v1）
 
-> **状态：阶段 0–1 完成 → 阶段 2 进行中（2026-11-06）。**
+> **状态：阶段 0–2 完成 → 阶段 3 待开始（2026-11-06）。**
 > 最后更新：2026-11-06
 > AdSense 站点状态：`需要注意` · 原因：**低价值内容**（2026-10 提交，已等 2 周）
 > **接手第一件事**：读第 8 节的「接手须知」，然后从第 9 节「进度日志」最后一条的「下一步」开始。
@@ -84,7 +84,7 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 |---|---|---|---|---|
 | **0** | 计划与基线 | 本文件 + 基线快照 | 0.5 天 | ✅ 已完成（2026-11-06） |
 | **1** | 内容骨架与数据层 | `src/content/*`、`src/lib/content.ts`、`GuideBody/GuideCard/ProsePage`、路由骨架（**不上 sitemap、不进导航、`noindex`**） | 1 天 | ✅ 已完成（2026-11-06） |
-| **2** | 站点身份页 | `/why-local` `/about` `/contact` `/changelog` `/roadmap` 正式文案 + 页脚/导航 + `terms` 主体 | 2 天 | ⬜ 未开始 |
+| **2** | 站点身份页 | `/why-local` `/about` `/contact` `/changelog` `/roadmap` 正式文案 + 页脚/导航 + `terms` 主体 | 2 天 | ✅ 已完成（2026-11-06） |
 | **3** | 首页扩写 | 首页 ≥900 词 + FAQ + FAQPage JSON-LD + `Coming soon` → `/roadmap` | 1.5 天 | ⬜ 未开始 |
 | **4** | 指南写作（前半） | 文章 1–5（en + zh） + 截图 | 3 天 | ⬜ 未开始 |
 | **5** | 指南写作（后半） | 文章 6–9（en + zh） + 截图 | 2.5 天 | ⬜ 未开始 |
@@ -136,6 +136,13 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 - `src/components/SiteHeader.tsx`：导航加 `Guides`。
 
 **验收**：五个页面正文合计 ≥ 3,000 词；`grep -rn "TODO" src/` 为空；`/contact` 表单能成功提交（`npm run dev` 手测）。
+
+**✅ 实际执行记录（2026-11-06）**
+
+- 运营主体已确认并入档：**Ripple Effect Technologies（马来西亚注册）**；`terms`「适用法律」写实、`/about` 首段点名主体、`SITE.entity` / `SITE.jurisdiction` 成为唯一真源。
+- 导航与页脚采用**「就绪才显示」**：`src/lib/nav.ts` 的 `visibleResources()` 用 `isIndexable()` 过滤，阶段 1–5 期间页脚 Resources 列与页头 Guides 入口自动隐藏，阶段 6 清空 `PENDING_PATHS` 后自动出现——不需要二次改代码。
+- 工具数已 11 → 12（补 `Compress PDF` / `压缩 PDF`，`hero.ctaNote` 与 `tools.note` 同步）；`privacy` 增加「广告」段落并把日期改成 2026-11-06。
+- `/contact` 表单走 server action：`sendMessage()` → `CONTACT_WEBHOOK_URL`（回落 `WAITLIST_WEBHOOK_URL`），与 waitlist 同一套错误处理。Vercel 环境变量要记得加。
 
 ---
 
@@ -305,5 +312,6 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 | 日期 | 阶段 | 完成内容 | 验证结果 | 下一步 |
 |---|---|---|---|---|
 | 2026-11-06 | 0 | 建立本计划；记录基线（根域 6 URL / 285 词，工具站 170 URL / 338–569 词）；确定分层与红线 | 未涉及代码 | 阶段 1：`src/content/*` + `src/lib/{content,indexing}.ts` + 3 个渲染组件 + 8 个路由骨架（`noindex`） |
-| 2026-11-06 | 1 | 新增 `src/content/{site,types}.ts`、`src/content/pages/*`（about/contact/why-local/changelog/roadmap/guides）、`src/content/guides/index.ts`（0 篇，待阶段 4）、`src/lib/{content,indexing,metadata,nav}.ts`、`GuideBody/GuideCard/ProsePage`、6 个路由（`/about` `/contact` `/why-local` `/changelog` `/roadmap` `/guides` + `/guides/[slug]`）；字典新增 `common`/`nav` 两组文案。顺带把「关于/联系/本地处理/更新日志/路线图」正文写完（原计划放在阶段 2） | `tsc --noEmit` 0 错；`npm run lint` 0 警告；`npm run build` 通过；6 个新页面 HTML 均为 `noindex, follow`；sitemap 仍为 6 条（未放开）。正文词数：why-local 934 词 / 1276 字；about 583 / 800；roadmap 465 / 653；contact 418 / 575；changelog 238 / 326；guides 268 / 370；首页仍 284 词（阶段 3 处理） | 阶段 2：页脚新增 Resources 列 + 页头加 Guides、`terms` 填实主体并删 `TODO`、工具数 11 → 12、`ProductGrid` 的 Coming soon 改指 `/roadmap`、`/contact` 接表单 |
+| 2026-11-06 | 1 | 新增 `src/content/{site,types}.ts`、`src/content/pages/*`（about/contact/why-local/changelog/roadmap/guides）、`src/content/guides/index.ts`（0 篇，待阶段 4）、`src/lib/{content,indexing,metadata,nav}.ts`、`GuideBody/GuideCard/ProsePage`、6 个路由（`/about` `/contact` `/why-local` `/changelog` `/roadmap` `/guides` + `/guides/[slug]`）；字典新增 `common`/`nav` 两组文案。顺带把「关于/联系/本地处理/更新日志/路线图」正文写完（原计划放在阶段 2） | `tsc --noEmit` 0 错；`npm run lint` 0 警告；`npm run build` 通过；6 个新页面 HTML 均为 `noindex, follow`；sitemap 仍为 6 条（未放开）。正文词数：why-local 934 词 / 1276 字；about 583 / 800；roadmap 465 / 653；contact 418 / 575；changelog 238 / 326；guides 268 / 370；首页仍 284 词（阶段 3 处理） | 阶段 2：页脚 Resources 列 + 页头 Guides 入口、`terms` 填实主体并删 `TODO`、工具数 11 → 12、`ProductGrid` 改指 `/roadmap`、`/contact` 接表单 |
+| 2026-11-06 | 2 | 运营主体入档（Ripple Effect Technologies / 马来西亚）：`terms` 删 `TODO` 写实、`/about` 点名主体、`SITE.entity` + `SITE.jurisdiction` 成唯一真源；`src/lib/nav.ts` 新增 `visibleResources()`（用 `isIndexable()` 过滤，未放开索引时页脚 Resources 列与页头 Guides 入口自动隐藏）；`ProductGrid` 的 Coming soon 卡改指 `/roadmap` 并在页脚同样处理；工具数 11 → 12（`Compress PDF`/`压缩 PDF`）；`privacy` 增加「广告」段并改日期；新增 `ContactForm` + `sendMessage()` server action（`CONTACT_WEBHOOK_URL`，回落 `WAITLIST_WEBHOOK_URL`） | `tsc --noEmit` 0 错；`lint` 0 警告；`build` 通过；`grep -rn "TODO" src/` **为空**；新页面仍全部 `noindex`；页脚 Resources 列按预期隐藏 | 阶段 3：首页扩写（900+ 词、4 个新 section、8–10 条可见 FAQ + 对应 `FAQPage` JSON-LD） |
 

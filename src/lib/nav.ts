@@ -1,3 +1,5 @@
+import { isIndexable } from "@/lib/indexing";
+
 /**
  * Locale-free routes for the content section.
  *
@@ -28,3 +30,12 @@ export const RESOURCE_KEYS: Record<ResourcePath, ResourceKey> = {
 };
 
 export const href = (locale: string, path: string) => `/${locale}${path}`;
+
+/**
+ * Resource links that are finished enough to be linked from the header/footer.
+ * Stages 1–5 keep every content page in `PENDING_PATHS`, so this returns an empty
+ * list until stage 6 opens indexing — no thin pages get linked into the nav.
+ */
+export function visibleResources(): ResourcePath[] {
+  return RESOURCE_PATHS.filter((path) => isIndexable(path));
+}

@@ -2,7 +2,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PDF_BASE, type Dictionary, type Locale } from "@/lib/dictionaries";
 
-/** The four product cards. Only Reeff.PDF is live today; the rest feed the waitlist. */
+/**
+ * The four product cards. Only Reeff.PDF is live; the rest link to /roadmap
+ * instead of "#waitlist", because a card that promises "coming soon" and goes
+ * nowhere is one of the placeholder patterns this site is being cleaned of.
+ */
 export default function ProductGrid({ locale, t }: { locale: Locale; t: Dictionary }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
@@ -39,10 +43,13 @@ export default function ProductGrid({ locale, t }: { locale: Locale; t: Dictiona
           ) : (
             <Link
               key={item.name}
-              href="#waitlist"
+              href={`/${locale}/roadmap`}
               className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all hover:border-white/20 hover:bg-white/[0.06]"
             >
               {card}
+              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-bold text-slate-400">
+                {t.nav.roadmap} <ArrowUpRight className="h-3 w-3" />
+              </span>
             </Link>
           );
         })}
@@ -50,3 +57,4 @@ export default function ProductGrid({ locale, t }: { locale: Locale; t: Dictiona
     </section>
   );
 }
+

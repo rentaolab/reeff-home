@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Mail } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 import ProsePage from "@/components/ProsePage";
 import { SITE } from "@/content/site";
 import { getPage } from "@/lib/content";
@@ -30,6 +31,12 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     <>
       <ProsePage locale={locale} t={t} path={PATH} doc={doc}>
         <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-white">{t.contactForm.title}</h2>
+          <p className="mb-6 mt-2 text-xs leading-relaxed text-slate-400">{t.contactForm.body}</p>
+          <ContactForm t={t.contactForm} />
+        </div>
+
+        <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{t.footer.contact}</p>
           <a
             href={`mailto:${SITE.email}`}

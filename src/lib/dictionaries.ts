@@ -16,7 +16,7 @@ export const isLocale = (value: string): value is Locale => (locales as readonly
 
 /** Tool subdomain — every product link points here with the same locale. */
 export const PDF_BASE = "https://pdf.reeff.app";
-/** TODO: replace with the real inbox before launch. */
+/** Keep in sync with `SITE.email` in src/content/site.ts (content pages and the footer both use it). */
 export const CONTACT_EMAIL = "hello@reeff.app";
 
 export type Section = { h: string; p: string; list?: string[] };
@@ -43,11 +43,24 @@ export type Dictionary = {
   footer: {
     brandLine: string;
     products: string;
+    resources: string;
     legal: string;
     privacy: string;
     terms: string;
     contact: string;
     copyright: string;
+  };
+  /** Labels for the feedback form on /contact (server action in src/app/actions.ts). */
+  contactForm: {
+    title: string;
+    body: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submit: string;
+    success: string;
+    error: string;
   };
   /** Shared labels for content pages (dates, reading time, breadcrumbs). */
   common: {
@@ -82,7 +95,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       subtitle:
         "Light, fast, simple: no installs, no sign-up, no waiting for uploads. One tool does one job — right in your browser.",
       cta: "Open Reeff.PDF",
-      ctaNote: "11 free PDF tools · no account needed",
+      ctaNote: "12 free PDF tools · no account needed",
     },
     products: {
       title: "The family",
@@ -111,7 +124,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     tools: {
       title: "Everything in Reeff.PDF",
-      note: "Eleven tools, all free, all running in your browser.",
+      note: "Twelve tools, all free, all running in your browser.",
       items: [
         { name: "Organize PDF", href: "/organize-pdf" },
         { name: "Merge PDF", href: "/merge-pdf" },
@@ -124,6 +137,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         { name: "Edit PDF", href: "/edit-pdf" },
         { name: "PDF to Image", href: "/pdf-to-image" },
         { name: "Image to PDF", href: "/image-to-pdf" },
+        { name: "Compress PDF", href: "/compress-pdf" },
       ],
     },
     waitlist: {
@@ -144,7 +158,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     privacy: {
       title: "Privacy",
-      updated: "Last updated: 2026",
+      updated: "Last updated: 6 November 2026",
       sections: [
         {
           h: "What runs where",
@@ -152,13 +166,17 @@ export const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           h: "What we collect",
-          p: "If you join a waitlist we store the email address you gave us and which product you picked. Nothing else. This site sets no advertising or cross-site tracking cookies.",
+          p: "If you join a waitlist or send a message from the contact page we store the email address you gave us, what you picked or wrote, and nothing else.",
+        },
+        {
+          h: "Advertising",
+          p: "Some pages on the toolkit (pdf.reeff.app) may carry Google AdSense units. Where they do, Google and its partners may use cookies or device identifiers to serve and measure those ads, and a consent prompt appears first where the law requires one. You can turn off personalised advertising in Google's Ads Settings. The brand site you are reading now carries no ad units.",
         },
         {
           h: "Server logs",
           p: "Like any website, our host (Vercel) records basic request data — IP address, user agent, timestamp — for security and abuse prevention.",
         },
-        { h: "Your choices", p: `Write to ${CONTACT_EMAIL} at any time and we will delete your waitlist entry.` },
+        { h: "Your choices", p: `Write to ${CONTACT_EMAIL} or use the contact page at any time and we will delete your waitlist entry.` },
         { h: "Changes", p: "If this policy changes we will update the date at the top of this page." },
       ],
     },
@@ -188,18 +206,30 @@ export const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           h: "Governing law",
-          p: "TODO: state your legal entity and jurisdiction here before launch. Contact us before filing any claim.",
+          p: "Reeff is operated by Ripple Effect Technologies, a company registered in Malaysia. These terms are governed by the laws of Malaysia, and any dispute falls under the jurisdiction of the Malaysian courts. Write to hello@reeff.app first — most problems are settled in one exchange of email.",
         },
       ],
     },
     footer: {
       brandLine: "Office chores, sorted.",
       products: "Products",
+      resources: "Resources",
       legal: "Legal",
       privacy: "Privacy",
       terms: "Terms",
       contact: "Contact",
       copyright: "© 2026 Reeff · reeff.app",
+    },
+    contactForm: {
+      title: "Send a message",
+      body: "No account, no ticket number. Describe the job or the bug and include the browser and file size if it is a bug.",
+      emailLabel: "Your email",
+      emailPlaceholder: "you@example.com",
+      messageLabel: "Message",
+      messagePlaceholder: "What were you trying to do, and what happened?",
+      submit: "Send",
+      success: "Message received. We read everything and usually reply within two working days.",
+      error: "That did not send. Check the email address, or write to us directly.",
     },
     common: {
       lastUpdated: "Last updated",
@@ -230,7 +260,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       subtitle:
         "轻·快·简：不装软件、不用注册、不用等上传。一个工具只做一件事，全部在浏览器里完成。",
       cta: "进入 Reeff.PDF",
-      ctaNote: "11 个免费 PDF 工具 · 无需账号",
+      ctaNote: "12 个免费 PDF 工具 · 无需账号",
     },
     products: {
       title: "产品家族",
@@ -253,7 +283,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     tools: {
       title: "Reeff.PDF 的全部工具",
-      note: "11 个工具，全部免费，全部在浏览器里跑。",
+      note: "12 个工具，全部免费，全部在浏览器里跑。",
       items: [
         { name: "页面整理", href: "/organize-pdf" },
         { name: "拼接 PDF", href: "/merge-pdf" },
@@ -266,6 +296,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         { name: "编辑 PDF", href: "/edit-pdf" },
         { name: "PDF 转图片", href: "/pdf-to-image" },
         { name: "图片转 PDF", href: "/image-to-pdf" },
+        { name: "压缩 PDF", href: "/compress-pdf" },
       ],
     },
     waitlist: {
@@ -281,7 +312,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     privacy: {
       title: "隐私政策",
-      updated: "最后更新：2026 年",
+      updated: "最后更新：2026 年 11 月 6 日",
       sections: [
         {
           h: "什么在本地、什么在云端",
@@ -289,13 +320,17 @@ export const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           h: "我们收集什么",
-          p: "如果你加入等待名单，我们只保存你填写的邮箱和你选择的产品，其他什么都不存。本站不设置广告 Cookie，也不做跨站追踪。",
+          p: "如果你加入等待名单，或从联系页发来留言，我们只保存你填写的邮箱、你选择或写下的内容，其他什么都不存。",
+        },
+        {
+          h: "广告",
+          p: "工具站（pdf.reeff.app）的部分页面可能展示 Google AdSense 广告。这些页面上，Google 及其合作方可能使用 Cookie 或设备标识来投放和衡量广告；法律要求时会先出现同意提示。你可以在 Google 的广告设置里关闭个性化广告。你现在看的这个品牌站本身不含广告位。",
         },
         {
           h: "服务器日志",
           p: "和任何网站一样，我们的托管商（Vercel）会记录基础请求信息（IP、User-Agent、时间戳），用于安全与防滥用。",
         },
-        { h: "你的选择", p: `随时写信到 ${CONTACT_EMAIL}，我们会删除你的等待名单记录。` },
+        { h: "你的选择", p: `随时写信到 ${CONTACT_EMAIL} 或使用联系页，我们会删除你的等待名单记录。` },
         { h: "变更", p: "如果本政策有变化，我们会更新本页顶部的日期。" },
       ],
     },
@@ -308,17 +343,29 @@ export const dictionaries: Record<Locale, Dictionary> = {
         { h: "无担保", p: "工具按「现状」提供，不附带任何形式的担保。处理重要文件前，请务必自行备份。" },
         { h: "责任限制", p: "在法律允许的范围内，我们不对间接损失或后果性损失负责，包括文件丢失或损坏。" },
         { h: "知识产权", p: "Reeff 名称、标识与站点内容归我们所有；你的文件始终完全属于你自己。" },
-        { h: "适用法律", p: "TODO：上线前在此填写你的经营主体与管辖地。如有争议，请先与我们联系。" },
+        { h: "适用法律", p: "Reeff 由在马来西亚注册的 Ripple Effect Technologies 运营。本条款适用马来西亚法律，争议由马来西亚法院管辖。请先写信到 hello@reeff.app——大多数问题一封邮件就能解决。" },
       ],
     },
     footer: {
       brandLine: "办公杂活，交给 Reeff",
       products: "产品",
+      resources: "资源",
       legal: "法务",
       privacy: "隐私政策",
       terms: "使用条款",
       contact: "联系我们",
       copyright: "© 2026 Reeff · reeff.app",
+    },
+    contactForm: {
+      title: "给我们留言",
+      body: "不用注册，也没有工单号。写清你想做的事或遇到的问题；如果是 Bug，请附上浏览器与文件体积。",
+      emailLabel: "你的邮箱",
+      emailPlaceholder: "you@example.com",
+      messageLabel: "留言",
+      messagePlaceholder: "你想做什么，实际发生了什么？",
+      submit: "发送",
+      success: "已收到。我们都会看，通常两个工作日内回复。",
+      error: "没有发送成功。检查一下邮箱地址，或直接写信给我们。",
     },
     common: {
       lastUpdated: "最后更新",

@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { PDF_BASE, type Dictionary, type Locale, locales } from "@/lib/dictionaries";
+import { isIndexable } from "@/lib/indexing";
 
 /** Locale names shown in the switcher, in their own language. */
 const LOCALE_LABEL: Record<Locale, string> = { en: "EN", zh: "中文" };
 
 /**
  * Shared header for every page. `path` is the locale-free part of the current
- * URL ("" | "/privacy" | "/terms") so the language switcher can swap the first
- * segment without needing a client component.
+ * URL ("/privacy", "/guides/merge-pdf...") so the language switcher can swap the
+ * first segment without needing a client component.
+ *
+ * The Guides entry only appears once /guides is indexable (src/lib/indexing.ts),
+ * so an unfinished section is never advertised in the nav.
  */
 export default function SiteHeader({ locale, t, path = "" }: { locale: Locale; t: Dictionary; path?: string }) {
   return (
@@ -29,6 +33,17 @@ export default function SiteHeader({ locale, t, path = "" }: { locale: Locale; t
           >
             {t.products.items[0].name}
           </a>
+          {isIndexable("/guides") && (
+            <Link
+              href={`/${locale}/guides`}
+              aria-current={path.startsWith("/guides") ? "true" : undefined}
+              className={`rounded-xl px-3 py-2 transition-colors ${
+                path.startsWith("/guides") ? "bg-white/10 text-white" : "text-slate-300 hover:bg-white/5 hover:text-white"
+              }`}
+            >
+              {t.nav.guides}
+            </Link>
+          )}
           {locales.map((code) => (
             <Link
               key={code}

@@ -16,7 +16,7 @@ export const aboutPage: Localized<PageDoc> = {
       { kind: "h2", text: "Who runs this site", id: "who" },
       {
         kind: "p",
-        text: `Reeff is built and maintained by the same small team that publishes Reeff.PDF. The code for both sites — this brand site and the toolkit at pdf.reeff.app — lives in public repositories in the ${SITE.org} organisation on GitHub (${SITE.orgUrl}), including the commit history.`,
+        text: `Reeff is operated by ${SITE.entity}, registered in ${SITE.jurisdiction}, and built by the same small team that publishes Reeff.PDF. The code for both sites — this brand site and the toolkit at pdf.reeff.app — lives in public repositories in the ${SITE.org} organisation on GitHub (${SITE.orgUrl}), including the commit history.`,
       },
       {
         kind: "p",
@@ -75,7 +75,7 @@ export const aboutPage: Localized<PageDoc> = {
       { kind: "h2", text: "谁在维护这个站", id: "who" },
       {
         kind: "p",
-        text: `Reeff 由发布 Reeff.PDF 的同一支小团队维护。品牌站与工具站（pdf.reeff.app）的代码都放在 GitHub 上 ${SITE.org} 组织的公开仓库里（${SITE.orgUrl}），提交历史也在那里。`,
+        text: `Reeff 由在${SITE.jurisdiction}注册的 ${SITE.entity} 运营，由发布 Reeff.PDF 的同一支小团队维护。品牌站与工具站（pdf.reeff.app）的代码都放在 GitHub 上 ${SITE.org} 组织的公开仓库里（${SITE.orgUrl}），提交历史也在那里。`,
       },
       {
         kind: "p",

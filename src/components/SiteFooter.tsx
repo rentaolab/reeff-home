@@ -1,10 +1,15 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, PDF_BASE, type Dictionary, type Locale } from "@/lib/dictionaries";
+import { PDF_BASE, type Dictionary, type Locale } from "@/lib/dictionaries";
+import { RESOURCE_KEYS, visibleResources } from "@/lib/nav";
 
 export default function SiteFooter({ locale, t }: { locale: Locale; t: Dictionary }) {
+  const resources = visibleResources();
+
   return (
     <footer className="mt-24 border-t border-white/5 bg-[#080E18]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+      <div
+        className={`mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 ${resources.length > 0 ? "md:grid-cols-4" : "md:grid-cols-3"}`}
+      >
         <div>
           <p className="text-sm font-bold text-white">{t.footer.brandLine}</p>
           <p className="mt-2 max-w-xs text-xs leading-relaxed text-slate-500">{t.meta.description}</p>
@@ -20,14 +25,30 @@ export default function SiteFooter({ locale, t }: { locale: Locale; t: Dictionar
                     {item.name} ↗
                   </a>
                 ) : (
-                  <span className="text-slate-500">
+                  <Link href={`/${locale}/roadmap`} className="text-slate-500 transition-colors hover:text-slate-300">
                     {item.name} <span className="text-slate-600">· {t.products.soon}</span>
-                  </span>
+                  </Link>
                 )}
               </li>
             ))}
           </ul>
         </div>
+
+        {/* Only rendered once the content pages are indexable — see src/lib/indexing.ts. */}
+        {resources.length > 0 && (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{t.footer.resources}</p>
+            <ul className="mt-3 space-y-2 text-xs">
+              {resources.map((path) => (
+                <li key={path}>
+                  <Link href={`/${locale}${path}`} className="text-slate-300 transition-colors hover:text-white">
+                    {t.nav[RESOURCE_KEYS[path]]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500">{t.footer.legal}</p>
@@ -43,9 +64,9 @@ export default function SiteFooter({ locale, t }: { locale: Locale; t: Dictionar
               </Link>
             </li>
             <li>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-slate-300 transition-colors hover:text-white">
+              <Link href={`/${locale}/contact`} className="text-slate-300 transition-colors hover:text-white">
                 {t.footer.contact}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -57,3 +78,4 @@ export default function SiteFooter({ locale, t }: { locale: Locale; t: Dictionar
     </footer>
   );
 }
+
