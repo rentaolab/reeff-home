@@ -2,6 +2,7 @@
 
 Reeff 家族的母品牌站点：承接品牌词、展示产品矩阵、收集 waitlist。
 定位与文案规则见 [docs/brand-brief.md](docs/brand-brief.md)（与工具仓库同源）。
+**AdSense「低价值内容」整改计划（当前进行中）见 [docs/adsense-review-plan.md](docs/adsense-review-plan.md)** —— 含阶段划分、逐文件改动清单、门禁规则与进度日志；开新对话请先读该文件的第 8、9 节。
 
 **为什么独立 repo**：与 `pdf.reeff.app`（工具站）内容、发布节奏、i18n 范围都不同；分开可保证这里任何改动都不会影响正在赚钱的工具站。
 
