@@ -17,7 +17,7 @@ export const isLocale = (value: string): value is Locale => (locales as readonly
 /** Tool subdomain — every product link points here with the same locale. */
 export const PDF_BASE = "https://pdf.reeff.app";
 /** Keep in sync with `SITE.email` in src/content/site.ts (content pages and the footer both use it). */
-export const CONTACT_EMAIL = "hello@reeff.app";
+export const CONTACT_EMAIL = "reeff.app@proton.me";
 
 export type Section = { h: string; p: string; list?: string[] };
 
@@ -206,7 +206,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         },
         {
           h: "Governing law",
-          p: "Reeff is operated by Ripple Effect Technologies, a company registered in Malaysia. These terms are governed by the laws of Malaysia, and any dispute falls under the jurisdiction of the Malaysian courts. Write to hello@reeff.app first — most problems are settled in one exchange of email.",
+          p: "Reeff is operated by Ripple Effect Technologies, a company registered in Malaysia. These terms are governed by the laws of Malaysia, and any dispute falls under the jurisdiction of the Malaysian courts. Write to reeff.app@proton.me first — most problems are settled in one exchange of email.",
         },
       ],
     },
@@ -343,7 +343,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         { h: "无担保", p: "工具按「现状」提供，不附带任何形式的担保。处理重要文件前，请务必自行备份。" },
         { h: "责任限制", p: "在法律允许的范围内，我们不对间接损失或后果性损失负责，包括文件丢失或损坏。" },
         { h: "知识产权", p: "Reeff 名称、标识与站点内容归我们所有；你的文件始终完全属于你自己。" },
-        { h: "适用法律", p: "Reeff 由在马来西亚注册的 Ripple Effect Technologies 运营。本条款适用马来西亚法律，争议由马来西亚法院管辖。请先写信到 hello@reeff.app——大多数问题一封邮件就能解决。" },
+        { h: "适用法律", p: "Reeff 由在马来西亚注册的 Ripple Effect Technologies 运营。本条款适用马来西亚法律，争议由马来西亚法院管辖。请先写信到 reeff.app@proton.me——大多数问题一封邮件就能解决。" },
       ],
     },
     footer: {

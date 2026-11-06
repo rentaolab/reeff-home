@@ -16,7 +16,7 @@ export const SITE = {
   org: "rentaolab",
   orgUrl: "https://github.com/rentaolab",
   author: "The Reeff maintainers",
-  email: "hello@reeff.app",
+  email: "reeff.app@proton.me",
   /** Operating entity, as stated in /terms and /about. */
   entity: "Ripple Effect Technologies",
   jurisdiction: "Malaysia",

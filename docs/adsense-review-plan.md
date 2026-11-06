@@ -301,7 +301,7 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 - 根域技术栈：Next 16 App Router + 手写双语字典（**无 next-intl**）+ Tailwind v4 + Vercel；`middleware.ts` 在 Next 16 中名为 `src/proxy.ts`。
 - 工具站技术栈：Next 16 静态导出 + next-intl（10 语言）+ Cloudflare Pages。
 - 发布商 ID：`ca-pub-4891040014815847`（两域 `ads.txt` 均已上线）。
-- 联系邮箱：`hello@reeff.app`（根域）/ `reeff.app@proton.me`（工具站）。
+- 联系邮箱：`reeff.app@proton.me`（根域与工具站统一）。
 
 ---
 

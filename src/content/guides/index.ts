@@ -1,3 +1,6 @@
+import { mergeWithoutLosingBookmarks } from "./merge-without-losing-bookmarks";
+import { splitPdfIntoChapters } from "./split-pdf-into-chapters";
+import { whyCompressPdfBarelyShrinks } from "./why-compress-pdf-barely-shrinks";
 import type { Guide, Localized } from "@/content/types";
 
 /**
@@ -7,7 +10,11 @@ import type { Guide, Localized } from "@/content/types";
  * Add new entries here (and to `guideSlugs` implicitly, it reads this array).
  * Order here does not matter: `getGuides` sorts by `updated` descending.
  */
-export const guides: Localized<Guide>[] = [];
+export const guides: Localized<Guide>[] = [
+  mergeWithoutLosingBookmarks,
+  splitPdfIntoChapters,
+  whyCompressPdfBarelyShrinks,
+];
 
 /** Stable list used by generateStaticParams and the sitemap. */
 export const guideSlugs: string[] = guides.map((entry) => entry.en.slug);

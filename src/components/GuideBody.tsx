@@ -1,4 +1,5 @@
 import type { Block } from "@/content/types";
+import { publicFileExists } from "@/lib/public-assets";
 
 /**
  * Renders the structured `Block[]` content model.
@@ -102,7 +103,17 @@ function BlockView({ block }: { block: Block }) {
         </figure>
       );
 
-    case "figure":
+    case "figure": {
+      if (!publicFileExists(block.src)) {
+        if (process.env.NODE_ENV === "production") return null;
+        return (
+          <figure className="rounded-2xl border border-dashed border-amber-500/40 bg-amber-500/[0.05] p-4">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-amber-300">Screenshot pending</p>
+            <p className="mt-1 break-all font-mono text-[11px] text-slate-400">{block.src}</p>
+            {block.caption && <figcaption className="mt-2 text-[11px] text-slate-500">{block.caption}</figcaption>}
+          </figure>
+        );
+      }
       return (
         <figure className="space-y-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -118,6 +129,7 @@ function BlockView({ block }: { block: Block }) {
           {block.caption && <figcaption className="text-[11px] text-slate-500">{block.caption}</figcaption>}
         </figure>
       );
+    }
 
     case "callout":
       return (

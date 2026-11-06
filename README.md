@@ -40,7 +40,7 @@ npm run brand    # 改了 public/brand/mark.svg 之后重新导出所有图标�
 ## ⚠️ 上线前必须核对的事
 
 1. **waitlist 目前不存任何数据** —— 设置环境变量 `WAITLIST_WEBHOOK_URL`（Formspree / Buttondown / Resend / Zapier / 自建 API 均可，只要接受一个 JSON POST）。未设置时表单照常显示成功，但数据被丢弃，且服务端会打 `error` 日志。联系页的留言走 `CONTACT_WEBHOOK_URL`（未设时回落到 `WAITLIST_WEBHOOK_URL`）。
-2. `CONTACT_EMAIL` 是 `hello@reeff.app`：这个邮箱必须真的能收信，并且与 `src/content/site.ts` 的 `SITE.email` 保持一致（正文里用的是后者）。
+2. `CONTACT_EMAIL` 是 `reeff.app@proton.me`：这个邮箱必须真的能收信，并且与 `src/content/site.ts` 的 `SITE.email` 保持一致（正文里用的是后者）。
 3. ✅ **「适用法律」已填**：Ripple Effect Technologies（马来西亚注册）。若主体或管辖地变更，同步改 `/[locale]/terms` 与 `src/content/site.ts` 的 `entity` / `jurisdiction`。
 4. 加 Vercel Analytics（或 Plausible）后再更新 `/privacy` 的「我们收集什么」。
 
