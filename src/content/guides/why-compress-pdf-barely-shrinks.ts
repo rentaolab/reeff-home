@@ -66,8 +66,8 @@ const en: Guide = {
       src: "/guides/why-compress-pdf-barely-shrinks/01-levels.webp",
       alt: "The compression tool showing Light, Balanced and Strong levels with the resulting file size for the same scanned 12 MB PDF.",
       caption: "The same 12 MB scan at the three levels. The size difference comes from pixels, not from a better algorithm.",
-      width: 1280,
-      height: 720,
+      width: 1897,
+      height: 1027,
     },
     { kind: "h2", text: "The number that explains everything: pixels", id: "pixels" },
     {
@@ -183,8 +183,8 @@ const zh: Guide = {
       src: "/guides/why-compress-pdf-barely-shrinks/01-levels.webp",
       alt: "压缩工具显示 Light、Balanced、Strong 三档，以及同一份 12 MB 扫描件在三档下的结果体积。",
       caption: "同一份 12 MB 扫描件在三档下的结果。体积差异来自像素，不是来自更聪明的算法。",
-      width: 1280,
-      height: 720,
+      width: 1897,
+      height: 1027,
     },
     { kind: "h2", text: "解释一切的那个数：像素", id: "pixels" },
     {

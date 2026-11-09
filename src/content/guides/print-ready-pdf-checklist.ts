@@ -59,8 +59,8 @@ const en: Guide = {
       src: "/guides/print-ready-pdf-checklist/01-crop-vs-size.webp",
       alt: "A page shown before and after cropping, with the file size unchanged and the document properties showing a smaller CropBox.",
       caption: "Same file before and after a crop: the visible area shrinks, the bytes behind it do not.",
-      width: 1280,
-      height: 720,
+      width: 1899,
+      height: 1029,
     },
     { kind: "h2", text: "Resolution: what the press actually needs", id: "resolution" },
     {
@@ -192,8 +192,8 @@ const zh: Guide = {
       src: "/guides/print-ready-pdf-checklist/01-crop-vs-size.webp",
       alt: "同一页在裁剪前后的对比，文件体积不变，文档属性显示 CropBox 变小了。",
       caption: "裁剪前后的同一个文件：可见区域小了，它背后的字节没少。",
-      width: 1280,
-      height: 720,
+      width: 1899,
+      height: 1029,
     },
     { kind: "h2", text: "分辨率：机器真正需要多少", id: "resolution" },
     {

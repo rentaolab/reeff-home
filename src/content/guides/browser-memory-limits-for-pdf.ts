@@ -40,8 +40,8 @@ const en: Guide = {
       src: "/guides/browser-memory-limits-for-pdf/01-memory-measurement.webp",
       alt: "A browser's own task manager showing the memory of one tab before, during and after converting a 100 MB PDF.",
       caption: "The browser's own task manager is the measurement that matters — not a published benchmark.",
-      width: 1280,
-      height: 720,
+      width: 788,
+      height: 688,
     },
     { kind: "h2", text: "Measuring your own limit in five minutes", id: "measure" },
     {
@@ -152,8 +152,8 @@ const zh: Guide = {
       src: "/guides/browser-memory-limits-for-pdf/01-memory-measurement.webp",
       alt: "浏览器自带的任务管理器，显示某个标签页在转换 100 MB PDF 之前、之中、之后的内存占用。",
       caption: "浏览器自带的任务管理器才是真正有意义的测量——不是谁公布的基准。",
-      width: 1280,
-      height: 720,
+      width: 788,
+      height: 688,
     },
     { kind: "h2", text: "五分钟量出你自己那条线", id: "measure" },
     {

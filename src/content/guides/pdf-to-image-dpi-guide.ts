@@ -57,8 +57,8 @@ const en: Guide = {
       src: "/guides/pdf-to-image-dpi-guide/01-dpi-and-format.webp",
       alt: "The PDF-to-image tool with format set to PNG and 150 DPI, showing the resulting page dimensions and file size.",
       caption: "Format and DPI are the only two settings that matter; the page count comes from the document.",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1026,
     },
     { kind: "h2", text: "One page or the whole document", id: "pages" },
     {
@@ -182,8 +182,8 @@ const zh: Guide = {
       src: "/guides/pdf-to-image-dpi-guide/01-dpi-and-format.webp",
       alt: "PDF 转图片工具里格式选为 PNG、分辨率 150 DPI，显示结果页面的尺寸与文件大小。",
       caption: "只有格式和 DPI 两个设置需要你决定；页数由文档本身决定。",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1026,
     },
     { kind: "h2", text: "一页，还是整份", id: "pages" },
     {

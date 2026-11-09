@@ -46,8 +46,8 @@ const en: Guide = {
       src: "/guides/delete-extract-reorder-which-tool/01-grid.webp",
       alt: "The page grid of a 40-page PDF with three pages marked for deletion, and the same document with two pages dragged into a new order.",
       caption: "The grid shows the whole document at once, which is the only view where an accidental deletion is obvious.",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1028,
     },
     { kind: "h2", text: "If the file is a scan", id: "scan" },
     {
@@ -175,8 +175,8 @@ const zh: Guide = {
       src: "/guides/delete-extract-reorder-which-tool/01-grid.webp",
       alt: "一份 40 页 PDF 的页面网格，其中三页被标记为删除；同一份文档另有两页被拖到了新位置。",
       caption: "网格一次显示整份文档，这是唯一能让误删一眼可见的视图。",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1028,
     },
     { kind: "h2", text: "如果文件是扫描件", id: "scan" },
     {

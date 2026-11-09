@@ -46,8 +46,8 @@ const en: Guide = {
       src: "/guides/sign-a-pdf-without-printer/01-signature-placed.webp",
       alt: "A signature image placed on the signature line of a one-page agreement in the PDF editor, with its size being adjusted.",
       caption: "Placing the signature as an image, scaled to the line rather than to the page.",
-      width: 1280,
-      height: 720,
+      width: 1894,
+      height: 1024,
     },
     { kind: "h2", text: "Getting a signature image worth using", id: "capture" },
     {
@@ -81,8 +81,8 @@ const en: Guide = {
       src: "/guides/sign-a-pdf-without-printer/02-sizing.webp",
       alt: "The same signature placed at three sizes on a signature line, showing the middle one sitting on the line at a realistic scale.",
       caption: "Too large reads as a stamp, too small reads as a thumbnail, on the line reads as a signature.",
-      width: 1280,
-      height: 720,
+      width: 1901,
+      height: 1026,
     },
     { kind: "h2", text: "What this signature cannot do", id: "limits" },
     {
@@ -163,8 +163,8 @@ const zh: Guide = {
       src: "/guides/sign-a-pdf-without-printer/01-signature-placed.webp",
       alt: "在 PDF 编辑器里把签名图片放到一页协议的签名线上，并调整其大小。",
       caption: "把签名当图片放上去，按签名线缩放，而不是按页面缩放。",
-      width: 1280,
-      height: 720,
+      width: 1894,
+      height: 1024,
     },
     { kind: "h2", text: "怎么得到一张能用的签名图", id: "capture" },
     {
@@ -198,8 +198,8 @@ const zh: Guide = {
       src: "/guides/sign-a-pdf-without-printer/02-sizing.webp",
       alt: "同一个签名在签名线上按三种尺寸放置，中间那一个压在线上的尺寸最自然。",
       caption: "太大像盖的，太小像缩略图，压在线上才像签名。",
-      width: 1280,
-      height: 720,
+      width: 1901,
+      height: 1026,
     },
     { kind: "h2", text: "这种签名做不到什么", id: "limits" },
     {

@@ -43,8 +43,8 @@ const en: Guide = {
       src: "/guides/split-pdf-into-chapters/01-cut-points.webp",
       alt: "The split tool with a 300-page PDF loaded and cut points marked between chapters, showing twelve segments in the result list.",
       caption: "Cut points are set after a page, not at a page: the file is divided into the segments between them.",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1030,
     },
     { kind: "h2", text: "Finding the boundaries before you cut", id: "boundaries" },
     {
@@ -154,8 +154,8 @@ const zh: Guide = {
       src: "/guides/split-pdf-into-chapters/01-cut-points.webp",
       alt: "拆分工具里载入了一份 300 页 PDF，章节之间标好了切分点，结果列表显示十二个分段。",
       caption: "切分点是「在第几页之后切」，不是「在第几页切」：文件被切成这些点之间的段落。",
-      width: 1280,
-      height: 720,
+      width: 1900,
+      height: 1030,
     },
     { kind: "h2", text: "先找边界，再动手", id: "boundaries" },
     {

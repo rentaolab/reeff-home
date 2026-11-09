@@ -61,8 +61,8 @@ const en: Guide = {
       src: "/guides/images-to-pdf-dpi-and-size/01-page-size-and-fit.webp",
       alt: "The images-to-PDF tool with four photos queued, page size set to A4, orientation on auto and a 28 pt margin.",
       caption: "Order, page size, orientation and margin — the four settings that decide the output.",
-      width: 1280,
-      height: 720,
+      width: 1899,
+      height: 1026,
     },
     { kind: "h2", text: "Hitting an attachment limit without guessing", id: "limits" },
     {
@@ -195,8 +195,8 @@ const zh: Guide = {
       src: "/guides/images-to-pdf-dpi-and-size/01-page-size-and-fit.webp",
       alt: "图片转 PDF 工具里排好了四张照片，页尺寸设为 A4，方向为自动，页边距 28 pt。",
       caption: "顺序、页尺寸、方向、页边距——决定产物的四个设置。",
-      width: 1280,
-      height: 720,
+      width: 1899,
+      height: 1026,
     },
     { kind: "h2", text: "不靠猜地压到附件上限以内", id: "limits" },
     {

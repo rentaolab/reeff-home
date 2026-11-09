@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw screenshot captures (the published copies live in public/guides/<slug>/)
+/docs/*.jpg
+/docs/*.bmp
+
+# Windows "downloaded from the internet" markers
+*:Zone.Identifier

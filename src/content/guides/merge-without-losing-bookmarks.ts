@@ -40,8 +40,8 @@ const en: Guide = {
       src: "/guides/merge-pdf-without-losing-bookmarks/01-bookmarks-panel.webp",
       alt: "The bookmarks panel of a merged 11-page PDF next to the panel of the original single invoice, showing the outline is empty after merging.",
       caption: "The bookmarks panel of the merged file (left) and of one source file (right). Same pages, different catalog.",
-      width: 1280,
-      height: 720,
+      width: 1927,
+      height: 1129,
     },
     { kind: "h2", text: "Doing the merge so the result is predictable", id: "how" },
     {
@@ -165,8 +165,8 @@ const zh: Guide = {
       src: "/guides/merge-pdf-without-losing-bookmarks/01-bookmarks-panel.webp",
       alt: "合并后 11 页 PDF 的书签面板，与原始单张发票的书签面板并排对比，显示合并后大纲为空。",
       caption: "合并产物（左）与其中一份源文件（右）的书签面板。页面一样，目录不一样。",
-      width: 1280,
-      height: 720,
+      width: 1927,
+      height: 1129,
     },
     { kind: "h2", text: "怎么合并才可控", id: "how" },
     {
