@@ -5,21 +5,19 @@ import type { Metadata } from "next";
  *
  * Why it exists: the whole point of the AdSense remediation is to stop shipping
  * pages that are thinner than a placeholder. Stages 1–5 of
- * docs/adsense-review-plan.md add routes before their copy is finished, so those
- * routes stay out of the sitemap, out of the nav, and carry `noindex` until
- * stage 6 empties this list. Never link to or index a pending path.
+ * docs/adsense-review-plan.md added routes before their copy was finished, so
+ * those routes stayed out of the sitemap, out of the nav, and carried `noindex`
+ * until stage 6 emptied this list.
+ *
+ * Stage 6 has now emptied it: every route below has finished copy, a screenshot
+ * and a word count that clears scripts/check-content.mjs. If a future page is
+ * ever added before its copy is ready, put its locale-free path back here and it
+ * will leave the sitemap, the header/footer and the index again — in one edit.
  *
  * Paths are locale-free. A trailing `[slug]` means "everything under it".
  */
-export const PENDING_PATHS = [
-  "/guides",
-  "/guides/[slug]",
-  "/why-local",
-  "/about",
-  "/contact",
-  "/changelog",
-  "/roadmap",
-] as const;
+export const PENDING_PATHS: readonly string[] = [];
+
 
 function normalise(path: string): string {
   if (!path.startsWith("/")) path = `/${path}`;

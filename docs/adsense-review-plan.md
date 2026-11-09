@@ -1,6 +1,6 @@
 # AdSense「低价值内容」整改计划（Site Review Plan v1）
 
-> **状态：阶段 0–5 文案完成 → 待补 10 张截图，然后进入阶段 6（2026-11-06）。**
+> **状态：阶段 0–6 完成 → 阶段 7 线上验证与 GSC 提交（2026-11-06）。**
 > 最后更新：2026-11-06
 > AdSense 站点状态：`需要注意` · 原因：**低价值内容**（2026-10 提交，已等 2 周）
 > **接手第一件事**：读第 8 节的「接手须知」，然后从第 9 节「进度日志」最后一条的「下一步」开始。
@@ -86,9 +86,9 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 | **1** | 内容骨架与数据层 | `src/content/*`、`src/lib/content.ts`、`GuideBody/GuideCard/ProsePage`、路由骨架（**不上 sitemap、不进导航、`noindex`**） | 1 天 | ✅ 已完成（2026-11-06） |
 | **2** | 站点身份页 | `/why-local` `/about` `/contact` `/changelog` `/roadmap` 正式文案 + 页脚/导航 + `terms` 主体 | 2 天 | ✅ 已完成（2026-11-06） |
 | **3** | 首页扩写 | 首页 ≥900 词 + FAQ + FAQPage JSON-LD + `Coming soon` → `/roadmap` | 1.5 天 | ✅ 已完成（2026-11-06） |
-| **4** | 指南写作（前半） | 文章 1–5（en + zh） + 截图 | 3 天 | ✅ 文案完成（2026-11-06），截图待补 |
-| **5** | 指南写作（后半） | 文章 6–9（en + zh） + 截图 | 2.5 天 | ✅ 文案完成（2026-11-06），截图待补 |
-| **6** | 放开索引与门禁 | 新页从 `noindex` 转为可索引、进 sitemap/导航、`check:content` 接入 postbuild | 1 天 | ⬜ 未开始 |
+| **4** | 指南写作（前半） | 文章 1–5（en + zh） + 截图 | 3 天 | ✅ 已完成（2026-11-06） |
+| **5** | 指南写作（后半） | 文章 6–9（en + zh） + 截图 | 2.5 天 | ✅ 已完成（2026-11-06） |
+| **6** | 放开索引与门禁 | 新页从 `noindex` 转为可索引、进 sitemap/导航、`check:content` 接入 postbuild | 1 天 | ✅ 已完成（2026-11-06） |
 | **7** | 线上验证与提交 | Vercel 部署核对、GSC 提交 sitemap 并请求索引、证据留存 | 1 天 | ⬜ 未开始 |
 | **8** | 重新提交 AdSense | 「问题—改动—证据」说明 + 提交 | 0.5 天（**在阶段 7 完成后 3–4 周**） | ⬜ 未开始 |
 
@@ -261,12 +261,12 @@ AdSense 审核看的是**提交的站点本身**，即 `reeff.app` 根域（`doc
 
 **硬约束（违反即回退）**
 
-1. 阶段 1–5 期间，新页面必须留在 `src/lib/indexing.ts` 的 `PENDING_PATHS` 里（不进 sitemap、不进导航、`robots:{index:false}`）。**内容没写完就不要放开索引。**
+1. 索引开关在 `src/lib/indexing.ts`。**阶段 6 已清空 `PENDING_PATHS`，所有内容页现在都可索引**；将来若要新增页面而文案未就绪，先把它的 locale-free 路径写回该数组（会自动退出 sitemap 与页头/页脚，并带上 `robots:{index:false}`）。**内容没写完就不要放开索引。**
 2. 文章正文放 `src/content/guides/`，**不要**塞进 `src/lib/dictionaries.ts`；该文件只放界面文案。
 3. 每篇文章的 `Record<Locale, Guide>` 必须 en/zh 同时存在（缺一门编译失败是**设计意图**，不要改成可选）。
 4. 不编造任何测量数字与作者身份；写不出就写自查方法。
 5. 文案风格遵循 `docs/brand-brief.md`：不用"最快/最好/极速/功能强大"，不用假倒计时，定价只说「本地免费不限量，云端按需付费」。
-6. 每次改动后跑：`npx tsc --noEmit && npm run lint && npm run build`。
+6. 每次改动后跑：`npx tsc --noEmit && npm run lint && npm run build`（`postbuild` 会自动跑 `check:content`，红了就是内容不达标）。
 
 **提交约定（与两个仓库一致）**
 
@@ -298,6 +298,7 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 
 - AdSense 审核主体：`reeff.app`（根域）；子域 `pdf.reeff.app` 是同一账号下的放量位置。
 - 基线（2026-11-06）：根域 sitemap **6** 条、首页 **285** 词；工具站 **170** URL、工具页正文 338–569 词、跨页共享模板 26–37%。
+- 现状（2026-11-06 阶段 6 后）：根域 sitemap **36** 条（9 个路径 + 9 篇文章，各 en/zh）、首页 1,465 词、指南 9 篇/10 张截图、根域 en 正文合计 **18,095** 词、`postbuild` 门禁全绿、审核期零广告请求。
 - 根域技术栈：Next 16 App Router + 手写双语字典（**无 next-intl**）+ Tailwind v4 + Vercel；`middleware.ts` 在 Next 16 中名为 `src/proxy.ts`。
 - 工具站技术栈：Next 16 静态导出 + next-intl（10 语言）+ Cloudflare Pages。
 - 发布商 ID：`ca-pub-4891040014815847`（两域 `ads.txt` 均已上线）。
@@ -316,5 +317,6 @@ curl -s https://reeff.app/sitemap.xml | grep -c "<loc>"     # 线上 URL 数
 | 2026-11-06 | 2 | 运营主体入档（Ripple Effect Technologies / 马来西亚）：`terms` 删 `TODO` 写实、`/about` 点名主体、`SITE.entity` + `SITE.jurisdiction` 成唯一真源；`src/lib/nav.ts` 新增 `visibleResources()`（用 `isIndexable()` 过滤，未放开索引时页脚 Resources 列与页头 Guides 入口自动隐藏）；`ProductGrid` 的 Coming soon 卡改指 `/roadmap` 并在页脚同样处理；工具数 11 → 12（`Compress PDF`/`压缩 PDF`）；`privacy` 增加「广告」段并改日期；新增 `ContactForm` + `sendMessage()` server action（`CONTACT_WEBHOOK_URL`，回落 `WAITLIST_WEBHOOK_URL`） | `tsc --noEmit` 0 错；`lint` 0 警告；`build` 通过；`grep -rn "TODO" src/` **为空**；新页面仍全部 `noindex`；页脚 Resources 列按预期隐藏 | 阶段 3：首页扩写（900+ 词、4 个新 section、8–10 条可见 FAQ + 对应 `FAQPage` JSON-LD） |
 | 2026-11-06 | 3 | 新增 `src/content/home.ts`（三段长文案 + 10 条 FAQ，en/zh 各一份）、`HomeSections` / `Faq` 组件；首页由 284 词扩到 **1,304 词**（zh 1,933 字）；`FAQPage` JSON-LD 与可见 `<details>` **同源同数**（各 10 条）；「最新指南」条在指南为空时自动隐藏，阶段 4 加文章后自动出现 | `tsc` 0 错、`lint` 0 警告、`build` 通过；首页 HTML 实测 en 1,304 词 / zh 1,933 字；`<details>` 10 条 == JSON-LD `Question` 10 条 | 阶段 4：指南 1–5（en ≥1,200 词 / zh ≥1,500 字，含截图） |
 | 2026-11-06 | 4 / 5 | 九篇指南正文全部写完（`src/content/guides/*.ts`，en+zh 同一文件）：合并丢书签、拆分章节、压缩为何几乎无效、印刷预检清单、页面手术决策、无打印机签字、图片转 PDF 的 DPI、PDF 转图片的 DPI、浏览器内存自查；`guides/index.ts` 注册 9 篇；新增 `src/lib/public-assets.ts` + `GuideBody` 的 `figure` 缺图静默跳过（dev 下显示虚线占位与待补路径）；截图清单落 `docs/guide-screenshots.md`；所有数字要么是算术推算、要么给出自查方法，`browser-memory-limits` 明确不提供基准表 | `tsc` 0 错、`lint` 0 警告、`build` 通过；18 个指南 HTML 逐篇统计全部过线（en 1,214–1,452 词，zh 1,617–2,076 字）；`/en/guides` 列出 9 篇；首页「最新指南」条自动出现 3 篇 | 补 10 张截图（见 `docs/guide-screenshots.md`）→ 阶段 6：清空 `PENDING_PATHS`、`check-content.mjs` 接 postbuild |
+| 2026-11-06 | 6 | 10 张截图从 `docs/` 归位到 `public/guides/<slug>/`（10 张 WebP 共 984 KB），20 个 `figure` 块的 `width`/`height` 全部改成真实像素（1900×1026–1030，内存那张 788×688）；清空 `PENDING_PATHS`（类型改成 `readonly string[]`，空数组不再退化成 `never`）；`src/app/sitemap.ts` 重写为「静态路径表 + 逐篇取自身 `updated`」，全部经 `isIndexable()` 过滤，日期手写不用 `new Date()`；新增 `scripts/check-content.mjs`（13 条规则）并挂 `postbuild` + `check:content`；`/guides` 增「Where to start」8 行决策表与「这里没有的东西」（+290 词），`/why-local` 增「什么时候本地工具反而是错的」5 条（+230 词），把根域 en 总量从 17,445 推到 **18,095** 词；`docs/content-plan.md` 新增；`.gitignore` 排除原始抓图与 `Zone.Identifier` | `tsc` 0 错、`lint` 0 警告、`build` 通过且 `postbuild` 全绿；sitemap **36 条 URL / 72 个 hreflang**；`sitemap` 每条含 `alternates.languages`；21 个内容页**无 `noindex`**（全部可索引）；新页截图实测渲染（`width=1927 height=1129` 与真实文件一致）；页头/页脚 Resources 链接已出现（`/en/about` `/en/contact` `/en/why-local` `/en/changelog` `/en/roadmap` `/en/guides`）；**负向测试**：移走任一截图 → `check:content` 退出码 1 并点名路径，放回即恢复全绿 | 阶段 7：Vercel 部署后 `curl -s https://reeff.app/sitemap.xml \| grep -c "<loc>"` 应为 36；GSC 提交 sitemap 并对 `/en`、`/en/guides`、三篇重点文章逐个请求索引；3–4 周后再按阶段 8 提 AdSense |
 
 

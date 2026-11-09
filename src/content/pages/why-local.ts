@@ -102,6 +102,21 @@ export const whyLocalPage: Localized<PageDoc> = {
           "Nothing syncs between devices, because there is no account and no history. That is the trade: no sync, and nothing to leak.",
         ],
       },
+      { kind: "h2", text: "When a local tool is the wrong tool", id: "wrong-tool" },
+      {
+        kind: "p",
+        text: "Local processing is the right default for a five-megabyte invoice and the wrong answer for a few jobs. Being clear about which is which costs one paragraph and saves a disappointed reader.",
+      },
+      {
+        kind: "ul",
+        items: [
+          "You need text out of a scan. That is optical character recognition, it needs a model measured in tens of megabytes, and it does not run well in a tab. Use a desktop application or a service — and read what that service does with the file.",
+          "The file is bigger than the machine's remaining memory. A 500 MB scan can be split locally into four parts and merged back, but nobody wants to do that twice a week; a batch job on a real machine is the honest answer then.",
+          "The job is a hundred files a night. A browser is good at one document at a time; anything scheduled belongs on a server you control.",
+          "You need a signature that proves the file has not changed. A drawn signature pasted into a PDF is a picture of a signature and proves nothing about who drew it — the guide on signing without a printer says exactly this, and points you at certificate-based services for the documents that have to hold up.",
+          "You need a colour-managed proof or PDF/X for a commercial printer. Rendering in the browser produces sRGB; a print shop wants CMYK with an embedded output intent, which is a different pipeline entirely.",
+        ],
+      },
       { kind: "h2", text: "Why we built it this way", id: "why" },
       {
         kind: "p",
@@ -204,6 +219,21 @@ export const whyLocalPage: Localized<PageDoc> = {
           "扫描件没有文字层。要选中、搜索或提取文字就需要 OCR，而 OCR 模型远比一页 JavaScript 大——所以我们不提供，而不是提供一个很差的版本。",
           "合并必须在下载开始前把成品文档放进内存。四百页很轻松，两个 G 的包在任何浏览器上都不行。",
           "设备之间不同步，因为没有账号也没有历史。这就是取舍：没有同步，也就没有东西可以泄露。",
+        ],
+      },
+      { kind: "h2", text: "什么时候本地工具反而是错的", id: "wrong-tool" },
+      {
+        kind: "p",
+        text: "对一份五兆的发票来说，本机处理是默认正确答案；但对下面这几类活儿，它是错的。把话说清楚只花一段，却能省掉一个失望的读者。",
+      },
+      {
+        kind: "ul",
+        items: [
+          "你要从扫描件里取出文字。那是文字识别：模型动辄几十兆，在标签页里跑不好。请用桌面软件或服务——同时读一下那个服务会拿你的文件做什么。",
+          "文件比机器剩余内存还大。500 MB 的扫描件可以本机拆成四份再合回去，但没人想每周做两次；这时候老实答案是找一台真机器跑批处理。",
+          "活儿是一晚上一百个文件。浏览器一次处理一份文档很强，凡是需要定时的，都该放在你自己控制的服务器上。",
+          "你要的是能证明「文件没被改过」的签名。把一个手写签名贴进 PDF，只是一张签名的图片，证明不了是谁画的——「没有打印机也能签 PDF」那篇里写的就是这个区别，并告诉你哪些文档该去找基于证书的电子签名服务。",
+          "你要的是带色彩管理或 PDF/X 的打样文件。浏览器渲染出来的是 sRGB；印厂要的是带输出意图的 CMYK，那是另一条完全不同的流程。",
         ],
       },
       { kind: "h2", text: "为什么这样做", id: "why" },

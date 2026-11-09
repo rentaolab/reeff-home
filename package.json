@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/check-content.mjs",
     "start": "next start",
     "lint": "eslint",
+    "check:content": "node scripts/check-content.mjs",
     "brand": "node scripts/brand.mjs"
   },
   "dependencies": {
