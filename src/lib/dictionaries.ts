@@ -9,6 +9,8 @@
  * "local features free and unlimited, server features pay as you go".
  */
 
+import type { ToolPath } from "./tool-paths";
+
 export const locales = ["en", "zh"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
@@ -26,7 +28,7 @@ export type Dictionary = {
   hero: { title: string; subtitle: string; cta: string; ctaNote: string };
   products: { title: string; live: string; soon: string; items: { name: string; tagline: string; live: boolean }[] };
   pillars: { title: string; items: { title: string; body: string }[] };
-  tools: { title: string; note: string; items: { name: string; href: string }[] };
+  tools: { title: string; note: string; items: { name: string; href: ToolPath }[] };
   waitlist: {
     title: string;
     body: string;

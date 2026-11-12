@@ -6,7 +6,9 @@
  * than the source that was supposed to produce them. A green run means: every
  * article exists in both languages, is long enough, carries honest ISO dates and
  * author, shows its screenshot, is not `noindex`, and appears in a sitemap with
- * more than the six URLs that got the site rejected.
+ * more than the six URLs that got the site rejected. It also means the twelve
+ * tool paths are identical in `tool-paths.ts`, both dictionaries and `proxy.ts`,
+ * so no legacy tool URL can silently fall back to a 404 again.
  *
  * Exit code is non-zero on any failure, so `npm run build` fails too. That is
  * the point: a thin or half-finished page must not reach production.
@@ -258,6 +260,56 @@ function checkPendingPaths() {
   notes.push("PENDING_PATHS 已清空，内容页可被索引");
 }
 
+/**
+ * Single-source-of-truth gate for the tool paths.
+ *
+ * `src/lib/tool-paths.ts` feeds both the homepage directory and `proxy.ts`. In
+ * commit 1802e50 the tool count went 11 → 12 and `compress-pdf` was added to the
+ * dictionary only, so the root domain kept answering 404 for `/compress-pdf`
+ * while Search Console held it in "Not indexed" and its eleven siblings
+ * redirected. TypeScript catches a *misspelled* path; only this catches a
+ * *missing* one — which is the failure mode that actually happened.
+ */
+function checkToolPaths() {
+  const toolPathsSource = read(path.join(ROOT, "src", "lib", "tool-paths.ts"));
+  const block = toolPathsSource.match(/export const TOOL_PATHS = \[([\s\S]*?)\] as const/)?.[1] ?? "";
+  const canonical = [...block.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+  if (canonical.length === 0) {
+    fail("src/lib/tool-paths.ts: 读不出 TOOL_PATHS");
+    return;
+  }
+
+  // Exactly the tool-directory hrefs, in source order: en's block then zh's.
+  const dict = read(path.join(ROOT, "src", "lib", "dictionaries.ts"));
+  const hrefs = [...dict.matchAll(/href:\s*"(\/[^"]+)"/g)].map((match) => match[1]);
+  if (hrefs.length !== canonical.length * 2) {
+    fail(
+      `dictionaries.ts 有 ${hrefs.length} 个工具 href，应为 ${canonical.length * 2} 个` +
+        `（en/zh 各 ${canonical.length}）——工具数与 TOOL_PATHS 不一致，proxy 的 301 会漏项`,
+    );
+    return;
+  }
+
+  const halves = [
+    ["en", hrefs.slice(0, canonical.length)],
+    ["zh", hrefs.slice(canonical.length)],
+  ];
+  for (const [locale, list] of halves) {
+    list.forEach((href, index) => {
+      if (href !== canonical[index]) {
+        fail(`dictionaries.ts (${locale}) 第 ${index + 1} 个工具是 ${href}，TOOL_PATHS 里是 ${canonical[index]}`);
+      }
+    });
+  }
+
+  const proxySource = read(path.join(ROOT, "src", "proxy.ts"));
+  if (!/from\s+"@\/lib\/tool-paths"/.test(proxySource) || !/isToolPath\(/.test(proxySource)) {
+    fail("proxy.ts 没有走 src/lib/tool-paths.ts 的 isToolPath —— 历史工具路径的 301 会再次漏项");
+  }
+
+  notes.push(`工具路径 ${canonical.length} 个，dictionaries(en/zh) 与 proxy 共用 tool-paths.ts`);
+}
+
 function checkForbiddenText() {
   const pattern = /\bTODO\b|\bFIXME\b|lorem ipsum/i;
   const walk = (dir) => {
@@ -302,6 +354,7 @@ function main() {
   checkRenderedGuides(guides);
   checkSitemap();
   checkPendingPaths();
+  checkToolPaths();
   checkForbiddenText();
 
   const total = totalEnglishWords(guides);
