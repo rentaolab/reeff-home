@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { guides } from "@/content/guides";
-import { locales } from "@/lib/dictionaries";
+import { defaultLocale, hreflangFor, locales } from "@/lib/dictionaries";
 import { isIndexable } from "@/lib/indexing";
 
 const SITE_URL = "https://reeff.app";
@@ -35,7 +35,12 @@ const url = (locale: string, path: string) => `${SITE_URL}/${locale}${path}`;
  */
 function localized(path: string, lastModified: string, changeFrequency: Entry["changeFrequency"], priority: number): Entry[] {
   if (!isIndexable(path)) return [];
-  const alternates = { languages: Object.fromEntries(locales.map((code) => [code, url(code, path)])) };
+  const alternates = {
+    languages: {
+      ...Object.fromEntries(locales.map((code) => [hreflangFor(code), url(code, path)])),
+      "x-default": url(defaultLocale, path),
+    },
+  };
   return locales.map((locale) => ({
     url: url(locale, path),
     lastModified: new Date(`${lastModified}T00:00:00.000Z`),

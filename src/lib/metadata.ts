@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/content/site";
-import { locales, type Locale } from "@/lib/dictionaries";
+import { hreflangFor, locales, type Locale } from "@/lib/dictionaries";
 import { robotsFor } from "@/lib/indexing";
 
 /**
@@ -30,7 +30,7 @@ export function buildMetadata({
     alternates: {
       canonical: `/${locale}${path}`,
       languages: {
-        ...Object.fromEntries(locales.map((code) => [code, `/${code}${path}`])),
+        ...Object.fromEntries(locales.map((code) => [hreflangFor(code), `/${code}${path}`])),
         "x-default": `/en${path}`,
       },
     },

@@ -16,6 +16,24 @@ export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 export const isLocale = (value: string): value is Locale => (locales as readonly string[]).includes(value);
 
+/**
+ * `hreflang` annotation per locale.
+ *
+ * The URL prefix stays the short code (`/zh/about`) — only the annotation is more
+ * precise. A bare `zh` also covers Traditional Chinese, which this site does not
+ * ship, so `zh-Hans` is the honest label and matches Simplified Chinese queries
+ * more reliably. The tool site annotates its `zh` locale the same way; keeping
+ * both domains on one label stops Google from treating the two Chinese versions
+ * as separate languages.
+ */
+export const HREFLANG: Record<Locale, string> = {
+  en: "en",
+  zh: "zh-Hans",
+};
+
+/** Locale code → `hreflang`/`lang` annotation (falls back to the code itself). */
+export const hreflangFor = (locale: Locale): string => HREFLANG[locale] ?? locale;
+
 /** Tool subdomain — every product link points here with the same locale. */
 export const PDF_BASE = "https://pdf.reeff.app";
 /** Keep in sync with `SITE.email` in src/content/site.ts (content pages and the footer both use it). */

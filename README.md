@@ -65,7 +65,7 @@ npm run brand    # 改了 public/brand/mark.svg 之后重新导出所有图标�
 ## SEO 说明
 
 - **关键词分工**（见 brand-brief §9）：根域只抢品牌词与类别词（`reeff`、`reeff app`、`office tools`）；所有工具长尾词（`merge pdf` 等）留给 `pdf.reeff.app`，避免两个站互相抢排名。
-- 根域自带 `Organization` + `WebSite` + `ItemList` JSON-LD（品牌实体识别）、`sitemap.xml`（9 个内容路径 + 9 篇指南，各 en/zh，共 36 条并带 hreflang alternates）、`robots.txt`。
+- 根域自带 `Organization` + `WebSite` + `ItemList` JSON-LD（品牌实体识别）、`sitemap.xml`（9 个内容路径 + 9 篇指南，各 en/zh，共 36 条，每条含 3 个 `hreflang` 链接：`en` / `zh-Hans` / `x-default`）、`robots.txt`。中文一律标注为 `zh-Hans`（不是裸 `zh`），与 `pdf.reeff.app` 一致 —— 两个域名对同一种语言用两个标签，会让 Google 把两版中文当成两种语言分别归组。
 - **历史工具 URL 统一 301 到子域**：`/{tool}`（如 `/merge-pdf`）与 `/{locale}/{tool}`（如 `/en/compress-pdf`）都由 `src/proxy.ts` 永久跳转到 `pdf.reeff.app` 的同路径。路径清单在 `src/lib/tool-paths.ts`，与字典里的工具目录共用，`check:content` 会断言两边完全一致。**不要再手写第二份清单** —— 工具数 11 → 12 那次漏了 `/compress-pdf`，它在 GSC「未编入索引」里挂成了长期 404。
 - 站点已加基线安全头（`frame-ancestors 'self'` + `X-Frame-Options: SAMEORIGIN` + `nosniff` + Referrer-Policy），防止被第三方 iframe 嵌套白嫖带宽/请求配额。
 - 建议把同样的 `frame-ancestors 'self'` 加到工具站（`pdf.reeff.app`）的 `next.config.ts`。
